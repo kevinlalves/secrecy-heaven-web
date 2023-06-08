@@ -3,9 +3,8 @@
 import { TextField } from '@/components/Form/TextField';
 import { Button } from '@/components/ui/Button';
 import { toast } from '@/components/ui/Toast/use-toast';
-import UserProvider, { useUser } from '@/providers/UserProvider';
-import { LoginSchema } from '@/schemas/LoginSchema';
-import { signIn as signInService } from '@/services/secrecyHeavenApi';
+import { SignUpSchema } from '@/schemas/SignUpSchema';
+import { signUp as signUpService } from '@/services/secrecyHeavenApi';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -15,20 +14,23 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 
-export default function LoginPage() {
-  const methods = useForm({ resolver: joiResolver(LoginSchema) });
+export default function SignUpPage() {
+  const methods = useForm({ resolver: joiResolver(SignUpSchema) });
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { signIn } = useUser();
   const router = useRouter();
 
-  const handleUserMutationSuccess = (user) => {
-    signIn(user);
-    router.push('/home');
+  const handleUserMutationSuccess = () => {
+    toast({
+      title: 'Conta criada com sucesso',
+      description: 'Agora é só logar!',
+    });
+
+    router.push('/');
   };
 
   const userMutation = useMutation({
-    mutationFn: signInService,
+    mutationFn: signUpService,
     onSuccess: handleUserMutationSuccess,
     onError: () => {
       setIsLoading(false);
@@ -45,6 +47,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     userMutation.mutate({
+      name: data.name,
       email: data.email,
       password: data.password,
     });
@@ -56,6 +59,8 @@ export default function LoginPage() {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
             <div className="grid gap-y-4">
+              <TextField name="name" label="Nome" isRequired autoComplete="name" />
+
               <TextField name="email" label="E-mail" isRequired autoComplete="e-mail" />
 
               <TextField
@@ -73,12 +78,27 @@ export default function LoginPage() {
                 }
               />
 
+              <TextField
+                name="passwordConfirmation"
+                label="Repetir senha"
+                isRequired
+                autoComplete="off"
+                type={isPasswordVisible ? 'text' : 'password'}
+                endAdornment={
+                  <FontAwesomeIcon
+                    className="h-5 w-5 cursor-pointer align-middle text-foreground-subtle"
+                    icon={isPasswordVisible ? faEyeSlash : faEye}
+                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
+                }
+              />
+
               <Button className="w-full" size="md" isLoading={isLoading}>
                 Entrar
               </Button>
 
-              <Button variant="ghost" as={Link} href="/sign-up">
-                Cadastre-se!
+              <Button variant="ghost" as={Link} href="/">
+                Voltar
               </Button>
             </div>
           </form>
