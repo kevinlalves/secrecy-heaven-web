@@ -3,7 +3,7 @@
 import { TextField } from '@/components/Form/TextField';
 import { Button } from '@/components/ui/Button';
 import { toast } from '@/components/ui/Toast/use-toast';
-import { SignUpSchema } from '@/schemas/SignUpSchema';
+import { SignUpSchema } from '@/schemas';
 import { signUp as signUpService } from '@/services/secrecyHeavenApi';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

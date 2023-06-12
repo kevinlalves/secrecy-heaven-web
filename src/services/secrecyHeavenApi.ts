@@ -16,8 +16,12 @@ type SignUpParams = {
   password: string;
 };
 
+type createStorageParams = {
+  file: any;
+};
+
 export async function signIn(params: LoginParams) {
-  const { data } = await secrecyHeavenApi.post('/auth/sign_in', params);
+  const { data } = await secrecyHeavenApi.post('/auth/sign-in', params);
 
   return data;
 }
@@ -29,7 +33,17 @@ export async function getCurrentUser() {
 }
 
 export async function signUp(params: SignUpParams) {
-  const { data } = await secrecyHeavenApi.post('/users');
+  const { data } = await secrecyHeavenApi.post('/users', params);
+
+  return data;
+}
+
+export async function createStorage(params: createStorageParams) {
+  const { data } = await secrecyHeavenApi.post(`/storages`, params, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
   return data;
 }
