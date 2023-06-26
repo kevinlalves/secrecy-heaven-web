@@ -19,7 +19,7 @@ export default function HomePage() {
       }),
     onError: () =>
       toast({
-        variant: 'desctructive',
+        variant: 'destructive',
         description: 'Nao foi possivel enviar o arquivo',
       }),
     onSettled: () => setIsLoading(false),

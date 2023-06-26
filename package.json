@@ -30,6 +30,7 @@
     "react-hook-form": "^7.44.3",
     "react-imask": "^6.6.2",
     "tailwind-merge": "^1.13.0",
+    "radix-ui": "^1.0.1",
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {

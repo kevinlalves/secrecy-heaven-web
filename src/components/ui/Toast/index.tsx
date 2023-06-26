@@ -1,10 +1,9 @@
-import * as React from 'react';
+import { cn } from '@/utils/tailwind';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/sharp-solid-svg-icons';
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import { VariantProps, cva } from 'class-variance-authority';
-
-import { cn } from 'src/utils/tailwind';
+import * as React from 'react';
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -40,16 +39,9 @@ const toastVariants = cva(
 
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
-  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
-    VariantProps<typeof toastVariants>
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
-  return (
-    <ToastPrimitives.Root
-      ref={ref}
-      className={cn(toastVariants({ variant }), className)}
-      {...props}
-    />
-  );
+  return <ToastPrimitives.Root ref={ref} className={cn(toastVariants({ variant }), className)} {...props} />;
 });
 Toast.displayName = ToastPrimitives.Root.displayName;
 
@@ -81,10 +73,7 @@ const ToastClose = React.forwardRef<
     toast-close=""
     {...props}
   >
-    <FontAwesomeIcon
-      icon={faClose}
-      className="h-4 w-4"
-    />
+    <FontAwesomeIcon icon={faClose} className="h-4 w-4" />
   </ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;
@@ -93,11 +82,7 @@ const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Title>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitives.Title
-    ref={ref}
-    className={cn('text-sm font-semibold', className)}
-    {...props}
-  />
+  <ToastPrimitives.Title ref={ref} className={cn('text-sm font-semibold', className)} {...props} />
 ));
 ToastTitle.displayName = ToastPrimitives.Title.displayName;
 
@@ -105,11 +90,7 @@ const ToastDescription = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Description>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitives.Description
-    ref={ref}
-    className={cn('text-sm opacity-90', className)}
-    {...props}
-  />
+  <ToastPrimitives.Description ref={ref} className={cn('text-sm opacity-90', className)} {...props} />
 ));
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 
