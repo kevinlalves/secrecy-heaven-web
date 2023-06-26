@@ -41,7 +41,7 @@ export default function HomePage() {
         <form className="flex flex-col gap-y-5" onSubmit={handleSubmit(onSubmit)}>
           <input className="bg-white text-xl" type="file" {...register('file')} />
 
-          <Button className="bg-white text-xl" type="submit">
+          <Button isLoading={isLoading} className="bg-white text-xl" type="submit">
             Fazer upload
           </Button>
         </form>
