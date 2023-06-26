@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/Button';
 import { toast } from '@/components/ui/Toast/use-toast';
 import { createStorage as createStorageService } from '@/services/secrecyHeavenApi';
 import { useMutation } from '@tanstack/react-query';
@@ -26,7 +27,6 @@ export default function HomePage() {
 
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
-    console.log(data.file);
 
     storageMutation.mutate({
       file: data.file[0],
@@ -34,12 +34,16 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex h-screen items-center justify-center bg-accent-most p-4 sm:p-28">
-      <div className="max-w-sm rounded bg-background-main p-5 shadow-md sm:p-10">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input className="bg-white" type="file" {...register('file')} />
+    <main className="flex justify-center">
+      <div className="flex max-w-sm flex-col justify-center rounded-xl bg-background-main p-5 shadow-md sm:p-10">
+        <p className="mb-10 text-center text-3xl text-foreground-main">Selecione o arquivo para upload</p>
 
-          <input className="bg-white" type="submit" />
+        <form className="flex flex-col gap-y-5" onSubmit={handleSubmit(onSubmit)}>
+          <input className="bg-white text-xl" type="file" {...register('file')} />
+
+          <Button className="bg-white text-xl" type="submit">
+            Fazer upload
+          </Button>
         </form>
       </div>
     </main>

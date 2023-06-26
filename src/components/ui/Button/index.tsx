@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { VariantProps, cva } from 'class-variance-authority';
-
 import { cn } from '@/utils/tailwind';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { VariantProps, cva } from 'class-variance-authority';
+import * as React from 'react';
 
 const buttonVariants = cva(
   'relative rounded-lg inline-flex font-sans font-medium not-italic no-underline inline-flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
@@ -12,13 +11,14 @@ const buttonVariants = cva(
       variant: {
         solid: 'bg-accent-main hover:bg-accent-most text-foreground-inverted',
         outline: 'bg-background-main hover:bg-background-least text-foreground-main border border-background-max',
-        ghost: 'hover:bg-background-alpha underline text-foreground-subtle',
+        ghost: 'hover:bg-background-alpha text-foreground-main',
         destructive: 'bg-negative-main hover:bg-negative-most text-white',
       },
       size: {
         sm: 'text-sm leading-5 h-8 gap-2 px-3',
         md: 'text-base leading-6 h-10 gap-2 px-4',
         lg: 'text-xl leading-7 h-12 gap-3 px-5',
+        xxl: 'text-3xl leading-8 h-16 px-7',
       },
       isLoading: {
         true: 'opacity-50 text-transparent',
@@ -49,6 +49,12 @@ const buttonVariants = cva(
         iconOnly: true,
         className: 'w-12 px-3',
       },
+      {
+        size: 'xxl',
+        isLoading: true,
+        iconOnly: true,
+        className: 'w-14 px-4',
+      },
 
       // Sizing for icon only buttons
       {
@@ -65,6 +71,11 @@ const buttonVariants = cva(
         size: 'lg',
         iconOnly: true,
         className: 'w-12',
+      },
+      {
+        size: 'xxl',
+        iconOnly: true,
+        className: 'w-14',
       },
     ],
     defaultVariants: {
@@ -88,6 +99,7 @@ const buttonIconVariants = cva('', {
       sm: '',
       md: '',
       lg: 'w-6 h-6',
+      xxl: 'w-6 h-6',
     },
     isLoading: {
       true: 'absolute animate-spin',
@@ -111,7 +123,7 @@ export interface ButtonProps
 
 export interface ButtonIconProps extends FontAwesomeIconProps, VariantProps<typeof buttonIconVariants> {
   isLoading?: boolean;
-  iconSize: ButtonProps['size'] | 'xs';
+  iconSize: ButtonProps['size'] | 'xs' | 'xxl';
 }
 
 const ButtonIcon = React.forwardRef<SVGSVGElement, ButtonIconProps>(

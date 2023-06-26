@@ -47,3 +47,13 @@ export async function createStorage(params: createStorageParams) {
 
   return data;
 }
+
+export async function getStorages(): Promise<Storage[]> {
+  const { data } = await secrecyHeavenApi.get('/storages');
+
+  return data;
+}
+
+export function getFileDownloadUrl(storageId: string) {
+  return `${process.env.NEXT_PUBLIC_SECRECY_HEAVEN_API_URL}/storages/${storageId}`;
+}

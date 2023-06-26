@@ -313,7 +313,7 @@
 
     --background-main: var(--black);
     --background-subtle: var(--coal-950);
-    --background-least: var(--coal-600);
+    --background-least: var(--coal-900);
     --background-alpha: var(--white);
     --background-max: var(--coal-700);
 
@@ -347,7 +347,7 @@
 
     --background-main: var(--black);
     --background-subtle: var(--coal-950);
-    --background-least: var(--coal-900);
+    --background-least: var(--coal-600);
     --background-alpha: var(--white);
     --background-max: var(--coal-700);
 
